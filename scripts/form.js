@@ -4,12 +4,14 @@ var errorslist = document.getElementById("errors")
 var messages = [];
 form.addEventListener("submit", (event)=>{
     event.preventDefault();
-    errorslist.innerHTML = null;
     
+    errorslist.innerHTML = "";
+    messages = [];
+
+
     if(document.getElementById("pseudo").value.length < 5){
         messages.push("Votre pseudo doit faire plus de 5 caractères")
     }
-
     if(document.getElementById("mail").value.length <5 || !(document.getElementById("mail").value.includes("@"))){
         messages.push("Votre email n'est pas correct");
     }
@@ -28,9 +30,15 @@ form.addEventListener("submit", (event)=>{
     if(document.getElementById("family").value == "void"){
         messages.push("Vous n'avez pas choisi de famille.");
     }
+
+    if(messages[0]==null){
+        messages.push("Vos informations ont été correctement enregistrées.");
+    }
+
     messages.forEach(element => {
         let error = document.createElement("li");
         error.innerHTML = element;
         errorslist.appendChild(error);
     });
+
 });
